@@ -19,6 +19,8 @@ namespace PongMono
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        private Paddle paddle;
+        
         public Game1()
             : base()
         {
@@ -34,7 +36,7 @@ namespace PongMono
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            IsMouseVisible = true;
 
             base.Initialize();
         }
@@ -48,7 +50,7 @@ namespace PongMono
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            paddle = new Paddle(Content.Load<Texture2D>("Paddle"),Vector2.Zero);
         }
 
         /// <summary>
@@ -83,9 +85,14 @@ namespace PongMono
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            paddle.Draw(spriteBatch);
+            spriteBatch.End();
+
 
             base.Draw(gameTime);
         }
     }
+
+    
 }
