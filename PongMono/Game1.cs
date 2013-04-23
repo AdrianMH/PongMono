@@ -19,7 +19,9 @@ namespace PongMono
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private Paddle paddle;
+        private GameObjects gameObjects;
+        private Paddle playerPaddle;
+        private Paddle computerPaddle;
         private Ball ball;
         
         public Game1()
@@ -51,9 +53,18 @@ namespace PongMono
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            paddle = new Paddle(Content.Load<Texture2D>("Paddle"),Vector2.Zero,new Rectangle(0,0,Window.ClientBounds.Width, Window.ClientBounds.Height ));
-            ball=new Ball(Content.Load<Texture2D>("Ball"), Vector2.Zero);
-            ball.AttachTo(paddle);
+            var gameBoundaries=new Rectangle(0,0,Window.ClientBounds.Width, Window.ClientBounds.Height );
+            var paddleTexture = Content.Load<Texture2D>("Paddle");
+
+            playerPaddle = new Paddle(paddleTexture, Vector2.Zero, gameBoundaries,PlayerTypes.Human);
+            computerPaddle = new Paddle(paddleTexture,Vector2.Zero ,gameBoundaries,PlayerTypes.Computer);
+
+            var computerPaddleLocation = new Vector2(gameBoundaries.Width - paddleTexture.Width, 0);
+            computerPaddle = new Paddle(paddleTexture, computerPaddleLocation, gameBoundaries,PlayerTypes.Computer);
+            ball=new Ball(Content.Load<Texture2D>("Ball"), Vector2.Zero, gameBoundaries);
+            ball.AttachTo(playerPaddle);
+
+            gameObjects = new GameObjects {PlayerPaddle = playerPaddle, ComputerPaddle = computerPaddle, Ball = ball};
         }
 
         /// <summary>
@@ -75,8 +86,9 @@ namespace PongMono
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            paddle.Update(gameTime);
-            ball.Update(gameTime);
+            playerPaddle.Update(gameTime, gameObjects);
+            computerPaddle.Update(gameTime, gameObjects);
+            ball.Update(gameTime, gameObjects);
 
             base.Update(gameTime);
         }
@@ -91,7 +103,8 @@ namespace PongMono
 
             spriteBatch.Begin();
             ball.Draw(spriteBatch);
-            paddle.Draw(spriteBatch);
+            playerPaddle.Draw(spriteBatch);
+            computerPaddle.Draw(spriteBatch);
             spriteBatch.End();
 
 

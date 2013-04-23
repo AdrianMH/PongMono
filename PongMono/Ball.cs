@@ -8,21 +8,25 @@ namespace PongMono
     {
         private Paddle attachedToPaddle;
 
-        public Ball(Texture2D texture, Vector2 location) : base(texture, location)
+        public Ball(Texture2D texture, Vector2 location,Rectangle gameBoundaries) : base(texture, location,gameBoundaries)
         {
 
         }
 
         protected override void CheckBounds()
         {
-            
+            if (Location.Y>=(_gameBoundaries.Height - _texture.Height)||Location.Y<=0)
+            {
+                var newVelocity = new Vector2(Velocity.X, -Velocity.Y);
+                Velocity = newVelocity;
+            }
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime,GameObjects gameObjects)
         {
             if(Keyboard.GetState().IsKeyDown(Keys.Space) && attachedToPaddle!=null)
             {
-                var newVelocity = new Vector2(7f, attachedToPaddle.Velocity.Y);
+                var newVelocity = new Vector2(7f, attachedToPaddle.Velocity.Y * .65f);
                 Velocity = newVelocity;
                 attachedToPaddle = null;
             }
@@ -33,7 +37,7 @@ namespace PongMono
                 Location.Y = attachedToPaddle.Location.Y;
             }
 
-            base.Update(gameTime);
+            base.Update(gameTime,gameObjects);
         }
 
         public void AttachTo(Paddle paddle)
