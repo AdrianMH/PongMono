@@ -27,20 +27,20 @@ namespace PongMono
             {
                 if (gameObjects.Ball.Location.Y + gameObjects.Ball.Height < Location.Y)
                 {
-                    Velocity = new Vector2(0, -8f);
+                    Velocity = new Vector2(0, -7.5f);
                 }
                 if (gameObjects.Ball.Location.Y > Location.Y + Height)
                 {
-                    Velocity = new Vector2(0, 8f);
+                    Velocity = new Vector2(0, 7.5f);
                 }
             }
 
             if (_playerType == PlayerTypes.Human)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                if (Keyboard.GetState().IsKeyDown(Keys.Up))
                     Velocity = new Vector2(0, -8f);
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                if (Keyboard.GetState().IsKeyDown(Keys.Down))
                     Velocity = new Vector2(0, 8f);
             }
             base.Update(gameTime,gameObjects);

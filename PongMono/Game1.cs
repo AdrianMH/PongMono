@@ -61,6 +61,7 @@ namespace PongMono
 
             var computerPaddleLocation = new Vector2(gameBoundaries.Width - paddleTexture.Width, 0);
             computerPaddle = new Paddle(paddleTexture, computerPaddleLocation, gameBoundaries,PlayerTypes.Computer);
+           
             ball=new Ball(Content.Load<Texture2D>("Ball"), Vector2.Zero, gameBoundaries);
             ball.AttachTo(playerPaddle);
 
