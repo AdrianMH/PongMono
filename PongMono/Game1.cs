@@ -23,7 +23,7 @@ namespace PongMono
         private Paddle playerPaddle;
         private Paddle computerPaddle;
         private Ball ball;
-        
+       
         public Game1()
             : base()
         {
@@ -65,7 +65,9 @@ namespace PongMono
             ball=new Ball(Content.Load<Texture2D>("Ball"), Vector2.Zero, gameBoundaries);
             ball.AttachTo(playerPaddle);
 
-            gameObjects = new GameObjects {PlayerPaddle = playerPaddle, ComputerPaddle = computerPaddle, Ball = ball};
+
+
+            gameObjects = new GameObjects {PlayerPaddle = playerPaddle, ComputerPaddle = computerPaddle, Ball = ball,};
         }
 
         /// <summary>
@@ -90,7 +92,7 @@ namespace PongMono
             playerPaddle.Update(gameTime, gameObjects);
             computerPaddle.Update(gameTime, gameObjects);
             ball.Update(gameTime, gameObjects);
-
+            
             base.Update(gameTime);
         }
 
@@ -106,7 +108,9 @@ namespace PongMono
             ball.Draw(spriteBatch);
             playerPaddle.Draw(spriteBatch);
             computerPaddle.Draw(spriteBatch);
+            
             spriteBatch.End();
+            
 
 
             base.Draw(gameTime);

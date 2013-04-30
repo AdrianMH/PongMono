@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -25,11 +26,14 @@ namespace PongMono
         {
             if(_playerType==PlayerTypes.Computer)
             {
-                if (gameObjects.Ball.Location.Y + gameObjects.Ball.Height < Location.Y)
+                var random = new Random();
+                var reactionThreshold = random.Next(30, 130);
+
+                if (gameObjects.Ball.Location.Y + gameObjects.Ball.Height < Location.Y + reactionThreshold)
                 {
                     Velocity = new Vector2(0, -7.5f);
                 }
-                if (gameObjects.Ball.Location.Y > Location.Y + Height)
+                if (gameObjects.Ball.Location.Y > Location.Y + Height + reactionThreshold)
                 {
                     Velocity = new Vector2(0, 7.5f);
                 }
