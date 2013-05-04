@@ -27,7 +27,7 @@ namespace PongMono
             if(_playerType==PlayerTypes.Computer)
             {
                 var random = new Random();
-                var reactionThreshold = random.Next(30, 130);
+                var reactionThreshold = random.Next(50, 130);
 
                 if (gameObjects.Ball.Location.Y + gameObjects.Ball.Height < Location.Y + reactionThreshold)
                 {
