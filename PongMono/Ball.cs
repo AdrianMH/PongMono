@@ -24,7 +24,7 @@ namespace PongMono
 
         public override void Update(GameTime gameTime,GameObjects gameObjects)
         {
-            if(Keyboard.GetState().IsKeyDown(Keys.Space) && attachedToPaddle!=null)
+            if((Keyboard.GetState().IsKeyDown(Keys.Space) || gameObjects.TouchInput.Tapped) && attachedToPaddle!=null)
             {
                 var newVelocity = new Vector2(10f, attachedToPaddle.Velocity.Y * .75f);
                 Velocity = newVelocity;

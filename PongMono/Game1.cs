@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 #endregion
@@ -40,6 +41,8 @@ namespace PongMono
         protected override void Initialize()
         {
             IsMouseVisible = true;
+
+            TouchPanel.EnabledGestures = GestureType.VerticalDrag | GestureType.Flick | GestureType.Tap;
 
             base.Initialize();
         }
@@ -89,11 +92,29 @@ namespace PongMono
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            gameObjects.TouchInput = new TouchInput();
+            GetTouchInput();
+
+
             playerPaddle.Update(gameTime, gameObjects);
             computerPaddle.Update(gameTime, gameObjects);
             ball.Update(gameTime, gameObjects);
             
             base.Update(gameTime);
+        }
+
+        private void GetTouchInput()
+        {
+            while(TouchPanel.IsGestureAvailable)
+            {
+                var gesture = TouchPanel.ReadGesture();
+                if (gesture.Delta.Y > 0)
+                    gameObjects.TouchInput.Down = true;
+                if (gesture.Delta.Y < 0)
+                    gameObjects.TouchInput.Up = true;
+                if (gesture.GestureType == GestureType.Tap)
+                    gameObjects.TouchInput.Tapped = true;
+            }
         }
 
         /// <summary>

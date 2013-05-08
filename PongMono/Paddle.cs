@@ -41,10 +41,10 @@ namespace PongMono
 
             if (_playerType == PlayerTypes.Human)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                if (Keyboard.GetState().IsKeyDown(Keys.Up) || gameObjects.TouchInput.Up)
                     Velocity = new Vector2(0, -8f);
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                if (Keyboard.GetState().IsKeyDown(Keys.Down) || gameObjects.TouchInput.Down)
                     Velocity = new Vector2(0, 8f);
             }
             base.Update(gameTime,gameObjects);
