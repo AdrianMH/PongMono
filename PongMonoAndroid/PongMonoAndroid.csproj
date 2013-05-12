@@ -68,17 +68,18 @@
     <Compile Include="..\PongMono\Paddle.cs">
       <Link>Paddle.cs</Link>
     </Compile>
-    <Compile Include="..\PongMono\Score.cs">
-      <Link>Score.cs</Link>
-    </Compile>
     <Compile Include="..\PongMono\Sprite.cs">
       <Link>Sprite.cs</Link>
     </Compile>
     <Compile Include="Activity1.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Score.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="..\PongMono\Content\GameFont.xnb">
+      <Link>Assets\Content\GameFont.xnb</Link>
+    </AndroidAsset>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

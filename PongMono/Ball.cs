@@ -26,7 +26,7 @@ namespace PongMono
         {
             if((Keyboard.GetState().IsKeyDown(Keys.Space) || gameObjects.TouchInput.Tapped) && attachedToPaddle!=null)
             {
-                var newVelocity = new Vector2(10f, attachedToPaddle.Velocity.Y * .75f);
+                var newVelocity = new Vector2(9f, attachedToPaddle.Velocity.Y * .65f);
                 Velocity = newVelocity;
                 attachedToPaddle = null;
             }

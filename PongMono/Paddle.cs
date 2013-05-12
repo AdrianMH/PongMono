@@ -27,13 +27,13 @@ namespace PongMono
             if(_playerType==PlayerTypes.Computer)
             {
                 var random = new Random();
-                var reactionThreshold = random.Next(50, 130);
+                var reactionThreshold = random.Next(30, 50);
 
-                if (gameObjects.Ball.Location.Y + gameObjects.Ball.Height < Location.Y + reactionThreshold)
+                if (gameObjects.Ball.Location.Y + gameObjects.Ball.Height < Location.Y + reactionThreshold )
                 {
                     Velocity = new Vector2(0, -7.5f);
                 }
-                if (gameObjects.Ball.Location.Y > Location.Y + Height + reactionThreshold)
+                if (gameObjects.Ball.Location.Y > Location.Y + Height + reactionThreshold )
                 {
                     Velocity = new Vector2(0, 7.5f);
                 }

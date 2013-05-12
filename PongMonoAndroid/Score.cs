@@ -34,7 +34,7 @@ namespace PongMono
                 gameObjects.Ball.AttachTo(gameObjects.PlayerPaddle);
             }
 
-            if(gameObjects.Ball.Location.X + gameObjects.Ball.Width > _gameBoundaries.Width)
+            if(gameObjects.Ball.Location.X > _gameBoundaries.Width)
             {
                 PlayerScore++;
                 gameObjects.Ball.AttachTo(gameObjects.PlayerPaddle);

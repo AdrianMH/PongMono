@@ -24,6 +24,7 @@ namespace PongMono
         private Paddle playerPaddle;
         private Paddle computerPaddle;
         private Ball ball;
+        private Score score;
        
         public Game1()
             : base()
@@ -68,9 +69,9 @@ namespace PongMono
             ball=new Ball(Content.Load<Texture2D>("Ball"), Vector2.Zero, gameBoundaries);
             ball.AttachTo(playerPaddle);
 
+            score = new Score(Content.Load<SpriteFont>("GameFont"),gameBoundaries);
 
-
-            gameObjects = new GameObjects {PlayerPaddle = playerPaddle, ComputerPaddle = computerPaddle, Ball = ball,};
+            gameObjects = new GameObjects {PlayerPaddle = playerPaddle, ComputerPaddle = computerPaddle, Ball = ball,Score = score};
         }
 
         /// <summary>
@@ -99,6 +100,7 @@ namespace PongMono
             playerPaddle.Update(gameTime, gameObjects);
             computerPaddle.Update(gameTime, gameObjects);
             ball.Update(gameTime, gameObjects);
+            score.Update(gameTime, gameObjects);
             
             base.Update(gameTime);
         }
@@ -126,10 +128,10 @@ namespace PongMono
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            ball.Draw(spriteBatch);
             playerPaddle.Draw(spriteBatch);
             computerPaddle.Draw(spriteBatch);
-            
+            ball.Draw(spriteBatch);
+            score.Draw(spriteBatch);
             spriteBatch.End();
             
 
