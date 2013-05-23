@@ -6,6 +6,12 @@ namespace PongMono
 {
     public class Ball : Sprite
     {
+#if ANDROID
+        private const float BALL_SPEED = 6f;
+#else
+        private const float BALL_SPEED = 9f;
+#endif
+        
         private Paddle attachedToPaddle;
 
         public Ball(Texture2D texture, Vector2 location,Rectangle gameBoundaries) : base(texture, location,gameBoundaries)
@@ -26,7 +32,7 @@ namespace PongMono
         {
             if((Keyboard.GetState().IsKeyDown(Keys.Space) || gameObjects.TouchInput.Tapped) && attachedToPaddle!=null)
             {
-                var newVelocity = new Vector2(9f, attachedToPaddle.Velocity.Y * .65f);
+                var newVelocity = new Vector2(BALL_SPEED, attachedToPaddle.Velocity.Y * .65f);
                 Velocity = newVelocity;
                 attachedToPaddle = null;
             }
